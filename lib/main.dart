@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'layout/home_layout.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -16,6 +18,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: false,
         primarySwatch: Colors.blue,
       ),
+      home: HomeLayout(),
     );
   }
 }

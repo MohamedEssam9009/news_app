@@ -1,6 +1,5 @@
+sealed class AppState {}
 
-sealed class AppCubitState {}
+final class AppInitial extends AppState {}
 
-final class AppCubitInitial extends AppCubitState {}
-
-final class AppCubitBottomNavState extends AppCubitState {}
+final class AppChangeBottomNavState extends AppState {}

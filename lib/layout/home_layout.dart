@@ -10,11 +10,9 @@ class HomeLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AppCubit(),
+      create: (context) => AppCubit()..getBusiness()..getSports()..getScience(),
       child: BlocConsumer<AppCubit, AppState>(
-        listener: (context, state) {
-          // TODO: implement listener
-        },
+        listener: (context, state) {},
         builder: (context, state) {
           var cubit = AppCubit.get(context);
           return Scaffold(

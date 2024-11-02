@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news_app/shared/components/components.dart';
+
+import '../shared/app_cubit/app_cubit_cubit.dart';
+import '../shared/app_cubit/app_cubit_state.dart';
 
 class ScienceScreen extends StatelessWidget {
   const ScienceScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text(
-        'Science Screen',
-        style: TextStyle(
-          fontSize: 25,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
+    var list = AppCubit.get(context).science;
+
+    return BlocConsumer<AppCubit, AppState>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        return articleBuilder(list);
+      },
     );
   }
 }

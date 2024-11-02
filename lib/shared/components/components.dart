@@ -1,3 +1,4 @@
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 
 Widget defaultButton({
@@ -60,3 +61,79 @@ Widget defaultFormField({
         border: const OutlineInputBorder(),
       ),
     );
+
+Widget myDivider() => Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: Container(
+        width: double.infinity,
+        height: 1.0,
+        color: Colors.grey[300],
+      ),
+    );
+
+Widget buildArticleItem(article) {
+  return Padding(
+    padding: const EdgeInsets.all(20.0),
+    child: Row(
+      children: [
+        Container(
+          width: 120.0,
+          height: 120.0,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10.0),
+            image: DecorationImage(
+              image: NetworkImage(
+                '${article['urlToImage']}',
+              ),
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+        const SizedBox(width: 20),
+        Expanded(
+          child: SizedBox(
+            height: 120.0,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: Text(
+                    '${article['title']}',
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                    ),
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+                Text(
+                  '${article['publishedAt']}',
+                  style: const TextStyle(
+                    color: Colors.grey,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        )
+      ],
+    ),
+  );
+}
+
+Widget articleBuilder(list) {
+  return ConditionalBuilder(
+    condition: list.isNotEmpty,
+    builder: (context) => ListView.separated(
+      physics: const BouncingScrollPhysics(),
+      itemBuilder: (context, index) => buildArticleItem(list[index]),
+      separatorBuilder: (context, index) => myDivider(),
+      itemCount: list.length,
+    ),
+    fallback: (context) => const Center(
+      child: CircularProgressIndicator(),
+    ),
+  );
+}

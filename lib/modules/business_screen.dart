@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../shared/app_cubit/app_cubit_cubit.dart';
 import '../shared/app_cubit/app_cubit_state.dart';
-
 import '../shared/components/components.dart';
 
 class BusinessScreen extends StatelessWidget {
@@ -15,7 +15,7 @@ class BusinessScreen extends StatelessWidget {
     return BlocConsumer<AppCubit, AppState>(
       listener: (context, state) {},
       builder: (context, state) {
-        return articleBuilder(list);
+        return articleBuilder(list, context);
       },
     );
   }

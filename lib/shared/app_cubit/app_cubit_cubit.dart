@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../modules/business_screen.dart';
 import '../../modules/science_screen.dart';
 import '../../modules/sports_screen.dart';
-
-import '../../modules/settings_screen.dart';
 import '../network/remote/dio_helper.dart';
 import 'app_cubit_state.dart';
 
@@ -28,17 +27,17 @@ class AppCubit extends Cubit<AppState> {
       icon: Icon(Icons.science),
       label: 'Science',
     ),
-    const BottomNavigationBarItem(
-      icon: Icon(Icons.settings),
-      label: 'Settings',
-    ),
+    // const BottomNavigationBarItem(
+    //   icon: Icon(Icons.settings),
+    //   label: 'Settings',
+    // ),
   ];
 
   List<Widget> screens = [
     const BusinessScreen(),
     const SportsScreen(),
     const ScienceScreen(),
-    const SettingsScreen(),
+    // const SettingsScreen(),
   ];
 
   void changeBottomNavState(int index) {
@@ -111,5 +110,14 @@ class AppCubit extends Cubit<AppState> {
       debugPrint(error.toString());
       emit(AppGetScienceErrorState(error: error.toString()));
     });
+  }
+
+  bool isDark = false;
+
+  ThemeMode appTheme = ThemeMode.dark;
+
+  void changeAppMode() {
+   isDark = !isDark;
+    emit(AppChangeModeState());
   }
 }

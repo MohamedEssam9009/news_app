@@ -33,3 +33,5 @@ final class AppGetScienceErrorState extends AppState {
 
   AppGetScienceErrorState({required this.error});
 }
+
+final class AppChangeModeState extends AppState {}

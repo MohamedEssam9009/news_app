@@ -71,7 +71,7 @@ Widget myDivider() => Padding(
       ),
     );
 
-Widget buildArticleItem(article) {
+Widget buildArticleItem(article, context) {
   return Padding(
     padding: const EdgeInsets.all(20.0),
     child: Row(
@@ -100,10 +100,7 @@ Widget buildArticleItem(article) {
                 Expanded(
                   child: Text(
                     '${article['title']}',
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                    ),
+                    style: Theme.of(context).textTheme.bodyLarge,
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -123,12 +120,12 @@ Widget buildArticleItem(article) {
   );
 }
 
-Widget articleBuilder(list) {
+Widget articleBuilder(list,context) {
   return ConditionalBuilder(
     condition: list.isNotEmpty,
     builder: (context) => ListView.separated(
       physics: const BouncingScrollPhysics(),
-      itemBuilder: (context, index) => buildArticleItem(list[index]),
+      itemBuilder: (context, index) => buildArticleItem(list[index], context),
       separatorBuilder: (context, index) => myDivider(),
       itemCount: list.length,
     ),

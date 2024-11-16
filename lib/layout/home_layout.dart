@@ -9,31 +9,34 @@ class HomeLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => AppCubit()..getBusiness()..getSports()..getScience(),
-      child: BlocConsumer<AppCubit, AppState>(
-        listener: (context, state) {},
-        builder: (context, state) {
-          var cubit = AppCubit.get(context);
-          return Scaffold(
-            appBar: AppBar(
-              title: const Text('News App'),
-              actions: [
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.search),
-                ),
-              ],
-            ),
-            bottomNavigationBar: BottomNavigationBar(
-              currentIndex: cubit.currentIndex,
-              onTap: (value) => cubit.changeBottomNavState(value),
-              items: cubit.bottomItems,
-            ),
-            body: cubit.screens[cubit.currentIndex],
-          );
-        },
-      ),
+    return BlocConsumer<AppCubit, AppState>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        var cubit = AppCubit.get(context);
+        return Scaffold(
+          appBar: AppBar(
+            title: const Text('News App'),
+            actions: [
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.search),
+              ),
+              IconButton(
+                onPressed: () {
+                  cubit.changeAppMode();
+                },
+                icon: const Icon(Icons.brightness_4_outlined),
+              ),
+            ],
+          ),
+          bottomNavigationBar: BottomNavigationBar(
+            currentIndex: cubit.currentIndex,
+            onTap: (value) => cubit.changeBottomNavState(value),
+            items: cubit.bottomItems,
+          ),
+          body: cubit.screens[cubit.currentIndex],
+        );
+      },
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news_app/shared/network/locale/cache_helper.dart';
 
 import '../../modules/business_screen.dart';
 import '../../modules/science_screen.dart';
@@ -116,8 +117,16 @@ class AppCubit extends Cubit<AppState> {
 
   ThemeMode appTheme = ThemeMode.dark;
 
-  void changeAppMode() {
-   isDark = !isDark;
-    emit(AppChangeModeState());
+  void changeAppMode({bool? fromShared}) {
+    if (fromShared != null) {
+      emit(AppChangeModeState());
+      isDark = fromShared;
+    } else {
+      isDark = !isDark;
+    }
+
+    CacheHelper.putBool(key: 'isDark', value: isDark).then((value) {
+      emit(AppChangeModeState());
+    });
   }
 }

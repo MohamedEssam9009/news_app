@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news_app/shared/cubits/news_cubit/news_cubit.dart';
 
-import '../shared/app_cubit/app_cubit_cubit.dart';
-import '../shared/app_cubit/app_cubit_state.dart';
+import '../shared/cubits/app_cubit/app_cubit_cubit.dart';
+import '../shared/cubits/app_cubit/app_cubit_state.dart';
 import '../shared/components/components.dart';
 
 class SportsScreen extends StatelessWidget {
@@ -10,7 +11,7 @@ class SportsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var list = AppCubit.get(context).sports;
+    var list = NewsCubit.get(context).sports;
 
     return BlocConsumer<AppCubit, AppState>(
       listener: (context, state) {},

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news_app/shared/cubits/news_cubit/news_cubit.dart';
+import 'package:news_app/shared/cubits/news_cubit/news_state.dart';
 
-import '../shared/app_cubit/app_cubit_cubit.dart';
-import '../shared/app_cubit/app_cubit_state.dart';
 import '../shared/components/components.dart';
 
 class BusinessScreen extends StatelessWidget {
@@ -10,9 +10,9 @@ class BusinessScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var list = AppCubit.get(context).business;
+    var list = NewsCubit.get(context).business;
 
-    return BlocConsumer<AppCubit, AppState>(
+    return BlocConsumer<NewsCubit, NewsState>(
       listener: (context, state) {},
       builder: (context, state) {
         return articleBuilder(list, context);

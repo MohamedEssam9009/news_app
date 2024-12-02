@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:news_app/shared/app_cubit/app_cubit_cubit.dart';
+import 'package:news_app/shared/cubits/app_cubit/app_cubit_cubit.dart';
+import 'package:news_app/shared/cubits/news_cubit/news_cubit.dart';
 import 'package:news_app/shared/network/locale/cache_helper.dart';
 
 import 'bloc_observer.dart';
 import 'layout/home_layout.dart';
-import 'shared/app_cubit/app_cubit_state.dart';
+import 'shared/cubits/app_cubit/app_cubit_state.dart';
 import 'shared/network/remote/dio_helper.dart';
 
 void main() async {
@@ -26,12 +27,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => AppCubit()
-        ..getBusiness()
-        ..getSports()
-        ..getScience()
-        ..changeAppMode(fromShared: isDark),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => AppCubit()..changeAppMode(fromShared: isDark),
+        ),
+        BlocProvider(
+          create: (context) => NewsCubit()
+            ..getBusiness()
+            ..getSports()
+            ..getScience(),
+        ),
+      ],
       child: BlocConsumer<AppCubit, AppState>(
         listener: (context, state) {},
         builder: (context, state) {

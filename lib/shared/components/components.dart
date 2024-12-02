@@ -120,7 +120,7 @@ Widget buildArticleItem(article, context) {
   );
 }
 
-Widget articleBuilder(list,context) {
+Widget articleBuilder(list, context) {
   return ConditionalBuilder(
     condition: list.isNotEmpty,
     builder: (context) => ListView.separated(
@@ -134,3 +134,10 @@ Widget articleBuilder(list,context) {
     ),
   );
 }
+
+void navigateTo(context, widget) => Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => widget,
+      ),
+    );

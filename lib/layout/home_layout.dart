@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news_app/modules/search_screen.dart';
+import 'package:news_app/shared/components/components.dart';
 
-import '../shared/app_cubit/app_cubit_cubit.dart';
-import '../shared/app_cubit/app_cubit_state.dart';
+import '../shared/cubits/app_cubit/app_cubit_cubit.dart';
+import '../shared/cubits/app_cubit/app_cubit_state.dart';
 
 class HomeLayout extends StatelessWidget {
   const HomeLayout({super.key});
@@ -18,7 +20,9 @@ class HomeLayout extends StatelessWidget {
             title: const Text('News App'),
             actions: [
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  navigateTo(context, SearchScreen());
+                },
                 icon: const Icon(Icons.search),
               ),
               IconButton(

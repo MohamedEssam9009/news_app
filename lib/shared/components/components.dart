@@ -131,7 +131,7 @@ Widget buildArticleItem(article, context) {
   );
 }
 
-Widget articleBuilder(list, context) {
+Widget articleBuilder(list, context,{bool isSearch = false}) {
   return ConditionalBuilder(
     condition: list.isNotEmpty,
     builder: (context) => ListView.separated(
@@ -140,7 +140,7 @@ Widget articleBuilder(list, context) {
       separatorBuilder: (context, index) => myDivider(),
       itemCount: list.length,
     ),
-    fallback: (context) => const Center(
+    fallback: (context) =>isSearch? Container(): const Center(
       child: CircularProgressIndicator(),
     ),
   );

@@ -1,5 +1,6 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
+import 'package:news_app/modules/web_view.dart';
 
 Widget defaultButton({
   double width = double.infinity,
@@ -72,50 +73,60 @@ Widget myDivider() => Padding(
     );
 
 Widget buildArticleItem(article, context) {
-  return Padding(
-    padding: const EdgeInsets.all(20.0),
-    child: Row(
-      children: [
-        Container(
-          width: 120.0,
-          height: 120.0,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10.0),
-            image: DecorationImage(
-              image: NetworkImage(
-                '${article['urlToImage']}',
-              ),
-              fit: BoxFit.cover,
-            ),
-          ),
+  return InkWell(
+    onTap: () {
+      navigateTo(
+        context,
+        WebView(
+          url: article['url'],
         ),
-        const SizedBox(width: 20),
-        Expanded(
-          child: SizedBox(
+      );
+    },
+    child: Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: Row(
+        children: [
+          Container(
+            width: 120.0,
             height: 120.0,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: Text(
-                    '${article['title']}',
-                    style: Theme.of(context).textTheme.bodyLarge,
-                    maxLines: 3,
-                    overflow: TextOverflow.ellipsis,
-                  ),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10.0),
+              image: DecorationImage(
+                image: NetworkImage(
+                  '${article['urlToImage']}',
                 ),
-                Text(
-                  '${article['publishedAt']}',
-                  style: const TextStyle(
-                    color: Colors.grey,
-                  ),
-                ),
-              ],
+                fit: BoxFit.cover,
+              ),
             ),
           ),
-        )
-      ],
+          const SizedBox(width: 20),
+          Expanded(
+            child: SizedBox(
+              height: 120.0,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: Text(
+                      '${article['title']}',
+                      style: Theme.of(context).textTheme.bodyLarge,
+                      maxLines: 3,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  Text(
+                    '${article['publishedAt']}',
+                    style: const TextStyle(
+                      color: Colors.grey,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          )
+        ],
+      ),
     ),
   );
 }
